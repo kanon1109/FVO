@@ -42,7 +42,7 @@ class GridFlowField {
     /** 目标点行索引 */
     private _targetRow: number = -1;
     /** 障碍物映射表 {col_row: boolean} */
-    private obstacleMap: { [key: string]: boolean };
+    private obstacleMap: { [key: string]: boolean } = {};
     // BFS最大距离值（表示不可达）
     private readonly BFS_MAX_DIST: number = 9999;
     /** 邻居检测方向数组（8方向） */
@@ -502,7 +502,6 @@ class GridFlowField {
     public addObstaclesByArray(obstacles: { col: number; row: number }[], isClearOld: boolean = false): void {
         // 入参校验1：数组为null/空数组时直接返回，避免无效遍历
         if (!obstacles || obstacles.length === 0) return;
-        if (!this.obstacleMap) this.obstacleMap = {};
         // 模式选择：覆盖模式 - 清空原有所有障碍；追加模式 - 保留原有障碍
         if (isClearOld) this.obstacleMap = {};
         // for循环遍历障碍数组，逐个添加障碍（替代forEach，支持精准控制循环）
