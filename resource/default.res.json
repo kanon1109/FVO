@@ -1,0 +1,40 @@
+{
+	"groups": [
+		{
+			"keys": "guaiwu1,guaiwu2,guaiwu3,guaiwu4,guaiwu5,guaiwu6",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/guaiwu1.png",
+			"type": "image",
+			"name": "guaiwu1"
+		},
+		{
+			"url": "assets/guaiwu2.png",
+			"type": "image",
+			"name": "guaiwu2"
+		},
+		{
+			"url": "assets/guaiwu3.png",
+			"type": "image",
+			"name": "guaiwu3"
+		},
+		{
+			"url": "assets/guaiwu4.png",
+			"type": "image",
+			"name": "guaiwu4"
+		},
+		{
+			"url": "assets/guaiwu5.png",
+			"type": "image",
+			"name": "guaiwu5"
+		},
+		{
+			"url": "assets/guaiwu6.png",
+			"type": "image",
+			"name": "guaiwu6"
+		}
+	]
+}
