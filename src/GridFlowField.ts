@@ -530,7 +530,7 @@ class GridFlowField {
         if (!this.obstacleMap) this.obstacleMap = {};
         for (var key in this.obstacleMap) {
             if (this.obstacleMap.hasOwnProperty(key)) {
-                delete this.obstacleMap
+                delete this.obstacleMap[key]
             }
         }
         let count: number = 0;
