@@ -90,7 +90,7 @@ class GridTest extends egret.DisplayObjectContainer {
 		this.gff = new GridFlowField();
 		this.gff.calculateGridCount(this.stage.stageWidth * 2, this.stage.stageHeight * 2);
 		// this.gff.randomGenerateObstacles(20);
-		// this.gff.addObstaclesByArray(this.obstacleArray);
+		this.gff.addObstaclesByArray(this.obstacleArray);
 		// this.gff.initGridLines(this.mapCtn);
 		// this.gff.initDistanceTexts(this.mapCtn);
 		// this.gff.initArrowShapes(this.mapCtn);
@@ -152,7 +152,7 @@ class GridTest extends egret.DisplayObjectContainer {
 		let gridInfo: { col: number; row: number; } = this.gff.getGridByScreenPos(pt.x, pt.y);
 		if (!gridInfo) return;
 		this.gff.calculateBFSDistanceField(gridInfo.col, gridInfo.row)
-		// this.gff.highlightTarget(gridInfo.col, gridInfo.row, this.mapCtn);
+		this.gff.highlightTarget(gridInfo.col, gridInfo.row, this.mapCtn);
 		// this.gff.updateArrowsDir();
 		// this.gff.updateDistanceTexts();
 	}

@@ -528,6 +528,11 @@ class GridFlowField {
     public randomGenerateObstacles(obstaclesCount: number): void {
         if (obstaclesCount < 0) obstaclesCount = 0;
         if (!this.obstacleMap) this.obstacleMap = {};
+        for (var key in this.obstacleMap) {
+            if (this.obstacleMap.hasOwnProperty(key)) {
+                delete this.obstacleMap
+            }
+        }
         let count: number = 0;
         // 随机生成指定数量的障碍物（避免重复）
         while (count < obstaclesCount) {
