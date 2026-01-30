@@ -88,9 +88,9 @@ class GridTest extends egret.DisplayObjectContainer {
 		this.gameCtn.addChild(this.enemyCtn);
 
 		this.gff = new GridFlowField();
-		this.gff.calculateGridCount(this.stage.stageWidth * 2, this.stage.stageHeight * 2);
-		// this.gff.randomGenerateObstacles(20);
-		this.gff.addObstaclesByArray(this.obstacleArray);
+		this.gff.calculateGridCount(this.stage.stageWidth, this.stage.stageHeight);
+		this.gff.randomGenerateObstacles(30);
+		// this.gff.addObstaclesByArray(this.obstacleArray);
 		// this.gff.initGridLines(this.mapCtn);
 		// this.gff.initDistanceTexts(this.mapCtn);
 		// this.gff.initArrowShapes(this.mapCtn);
@@ -98,11 +98,11 @@ class GridTest extends egret.DisplayObjectContainer {
 		this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTap, this);
 		console.log(this.enemyDataList.length);
 		this.am = new AgentManager(this.gff);
-		this.addAgentVos();
+		this.initAgentVos();
 		this.addEventListener(egret.Event.ENTER_FRAME, this.loop, this);
 	}
 
-	private addAgentVos(): void {
+	private initAgentVos(): void {
 		for (let i: number = 0; i < this.enemyDataList.length; i++) {
 			// 随机选择纹理
 			const textureIndex: number = Math.floor(Math.random() * this.ENEMY_TEXTURE_NAMES.length);
@@ -117,6 +117,27 @@ class GridTest extends egret.DisplayObjectContainer {
 			this.enemyCtn.addChild(agent);
 			let data: { x: number, y: number, rotation?: number } = this.enemyDataList[i];
 			let aVo: AgentVo = this.am.addAgentVo(data.x, data.y, r, data.rotation);
+			aVo.userData = agent;
+		}
+		this.am.update();
+	}
+
+
+	private addAgentVos(count:number):void
+	{
+		for (let i: number = 0; i < count; i++) {
+			// 随机选择纹理
+			const textureIndex: number = Math.floor(Math.random() * this.ENEMY_TEXTURE_NAMES.length);
+			const textureName: string = this.ENEMY_TEXTURE_NAMES[textureIndex];
+			const texture: egret.Texture | null = RES.getRes(textureName);
+			// 使用纹理创建敌人
+			let agent: egret.DisplayObject = new egret.Bitmap(texture);
+			agent.anchorOffsetX = agent.width * 0.46;
+			agent.anchorOffsetY = agent.height * 0.56;
+			agent.scaleX = agent.scaleY = .5;
+			let r: number = (agent.width > agent.height ? agent.width : agent.height) * agent.scaleY / 2;
+			this.enemyCtn.addChild(agent);
+			let aVo: AgentVo = this.am.addAgentVo(this.stage.stageWidth / 2, this.stage.stageHeight / 2, r, 0);
 			aVo.userData = agent;
 		}
 		this.am.update();
@@ -147,7 +168,7 @@ class GridTest extends egret.DisplayObjectContainer {
      * @param e 触摸事件对象
      */
 	private onTouchTap(e: egret.TouchEvent): void {
-		this.addAgentVos();
+		if(this.am.agents.length < 200) this.addAgentVos(30);
 		let pt: egret.Point = this.gameCtn.globalToLocal(e.stageX, e.stageY)
 		let gridInfo: { col: number; row: number; } = this.gff.getGridByScreenPos(pt.x, pt.y);
 		if (!gridInfo) return;
