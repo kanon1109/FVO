@@ -437,18 +437,12 @@ class AgentManager {
 		// 步骤1：将当前角度和目标角度统一归一化到 0~360 范围
 		const normalizedCur: number = ((curRot % 360) + 360) % 360;
 		const normalizedTarget: number = ((targetRot % 360) + 360) % 360;
-
 		// 步骤2：计算最短路径差值（确保差值在 -180 ~ 180 之间）
 		let diff: number = normalizedTarget - normalizedCur;
-		if (diff > 180) {
-			diff -= 360; // 超过180度则反向走
-		} else if (diff < -180) {
-			diff += 360; // 低于-180度则正向走
-		}
-
+		if (diff > 180) diff -= 360; // 超过180度则反向走
+		else if (diff < -180) diff += 360; // 低于-180度则正向走
 		// 步骤3：平滑插值（0.2 是平滑系数，可根据需求调整）
 		const newRot: number = normalizedCur + diff * 0.2;
-
 		// 可选：将结果再归一化（避免角度值无限累积）
 		return ((newRot % 360) + 360) % 360;
 	}
