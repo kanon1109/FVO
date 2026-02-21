@@ -96,7 +96,7 @@ class GridTest extends egret.DisplayObjectContainer {
 		// this.gff.initArrowShapes(this.mapCtn);
 		this.gff.initObstacleShapes(this.mapCtn);
 		this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTap, this);
-		console.log(this.enemyDataList.length);
+		// console.log(this.enemyDataList.length);
 		this.am = new AgentManager(this.gff);
 		this.initAgentVos();
 		this.addEventListener(egret.Event.ENTER_FRAME, this.loop, this);
@@ -168,7 +168,7 @@ class GridTest extends egret.DisplayObjectContainer {
      * @param e 触摸事件对象
      */
 	private onTouchTap(e: egret.TouchEvent): void {
-		if(this.am.agents.length < 200) this.addAgentVos(30);
+		// if(this.am.agents.length < 200) this.addAgentVos(30);
 		let pt: egret.Point = this.gameCtn.globalToLocal(e.stageX, e.stageY)
 		let gridInfo: { col: number; row: number; } = this.gff.getGridByScreenPos(pt.x, pt.y);
 		if (!gridInfo) return;
